@@ -316,6 +316,56 @@ export type Database = {
           },
         ]
       }
+      tickets: {
+        Row: {
+          arrival_at: string
+          code: string
+          created_at: string
+          destination: string
+          full_name: string
+          id: string
+          lot_id: string
+          plate: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          arrival_at?: string
+          code: string
+          created_at?: string
+          destination: string
+          full_name: string
+          id?: string
+          lot_id: string
+          plate: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          arrival_at?: string
+          code?: string
+          created_at?: string
+          destination?: string
+          full_name?: string
+          id?: string
+          lot_id?: string
+          plate?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tickets_lot_id_fkey"
+            columns: ["lot_id"]
+            isOneToOne: false
+            referencedRelation: "parking_lots"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           id: string
