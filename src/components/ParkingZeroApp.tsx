@@ -82,17 +82,30 @@ export default function ParkingZeroApp() {
               destination={destination || "Marco Zero, Recife Antigo"}
               user={user}
               onBack={() => setScreen("results")}
-              onFinish={async () => {
+              onGenerateTicket={async ({ plate }) => {
                 if (!user) { setScreen("auth"); return; }
                 try {
-                  await createTrip({ userId: user.id, option: selected, destination: destination || "Marco Zero, Recife Antigo" });
-                  toast.success("Reserva confirmada e pagamento via Pix processado");
+                  const t = await createTicket({
+                    userId: user.id,
+                    fullName: user.fullName,
+                    plate,
+                    option: selected,
+                    destination: destination || "Marco Zero, Recife Antigo",
+                  });
+                  setTicket(t);
+                  toast.success("Ticket de chegada gerado");
                   await Promise.all([reloadLots(), reloadMetrics()]);
-                  setScreen("dashboard");
+                  setScreen("ticket");
                 } catch (e) {
                   toast.error((e as Error).message);
                 }
               }}
+            />
+          )}
+          {screen === "ticket" && ticket && (
+            <TicketScreen key="tk" ticket={ticket}
+              onBack={() => setScreen("route")}
+              onDone={() => setScreen("dashboard")}
             />
           )}
           {screen === "dashboard" && (
