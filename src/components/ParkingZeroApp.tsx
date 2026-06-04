@@ -29,6 +29,7 @@ export default function ParkingZeroApp() {
   const [screen, setScreen] = useState<Screen>("splash");
   const [destination, setDestination] = useState("");
   const [selected, setSelected] = useState<ParkingOption | null>(null);
+  const [ticket, setTicket] = useState<Ticket | null>(null);
   const { data: lots, loading: lotsLoading, reload: reloadLots } = useParkingLots();
   const { metrics, reload: reloadMetrics } = useUserMetrics(user?.id ?? null);
 
