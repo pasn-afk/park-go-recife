@@ -13,6 +13,7 @@
     "preview": "vite preview",
     "preview:cloudflare": "npm run build && npx wrangler pages dev dist",
     "deploy:cloudflare": "npm run build && npx wrangler pages deploy dist",
+    "deploy:cloudflare:ci": "npx wrangler pages deploy dist --project-name=park-go-recife --branch=main",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
